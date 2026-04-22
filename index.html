@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高清图片全屏展示 (4096x2273)</title>
+    <style>
+        /* 彻底清除默认边距和滚动条 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden; /* 禁止滚动 */
+        }
+
+        /* 铺满容器 */
+        .image-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 核心修改：使用 cover 确保图片占满屏幕 */
+        img {
+            width: 100%;
+            height: 100%;
+            /* cover 模式会让图片比例不变，但会撑满容器，多余部分被裁切 */
+            object-fit: cover; 
+            /* 居中对齐图片内容 */
+            object-position: center;
+        }
+
+        /* 加载动画 */
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-family: sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loader" id="loader">LOADING 4096 × 2273...</div>
+
+    <div class="image-container">
+        <!-- 替换为你的实际文件名 -->
+        <img src="renshou.png" 
+             alt="Full Screen Image" 
+             onload="document.getElementById('loader').style.display='none';"
+             onerror="this.src='https://via.placeholder.com/4096x2273?text=Image+Load+Error'">
+    </div>
+
+</body>
+</html>
